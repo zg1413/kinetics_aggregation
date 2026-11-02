@@ -8,6 +8,7 @@ Here is the workflow which allows the results [1] to be reproduced from the data
 2. pair_corr.py - computes pair correlation function between Li and O's in TFSI to determine suitable real-space cut-off for associations.
 
 3. probability*.py - computes coordination numbers and adjacency matrix from the MD trajector
+
 	3.1 - probability.py - computes the coordination numbers of TFSI O's around Na, and Na's around TFSI
 	3.2 - probability_adj.py - computes the adjacency matrix for the Na-O's associations
 	3.3 - probability_common.py - common functions used by 3.1 and 3.2
