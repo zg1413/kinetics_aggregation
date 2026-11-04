@@ -10,16 +10,24 @@ Here is the workflow which allows the results [1] to be reproduced from the data
 3. probability*.py - computes coordination numbers and adjacency matrix from the MD trajector
 
 	3.1 - probability.py - computes the coordination numbers of TFSI O's around Na, and Na's around TFSI
+
 	3.2 - probability_adj.py - computes the adjacency matrix for the Na-O's associations
+
 	3.3 - probability_common.py - common functions used by 3.1 and 3.2
 
 4. GRAPHS.py - computes cluster distribution from the corresponding adjecency matrix
 
 5. PLOT_*.py - plotting functions 
-	5.1 -  
-	5.2 - 
-	5.3 - 
-	5.4 - 
+
+	5.1 - PLOT_P.py - plotting how the associaiton probabilities change in time from MD and theory
+
+	5.2 - plot_p_common.py - functions used in PLOT_P.py, common to other plotting functions
+
+	5.3 - PLOT_CLM.py - plotting how cluster distribution from MD changes in time  
+
+	5.4 - PLOT_CLM_THRY.py - plotting how cluster distribution from theory changes in time
+
+	5.5 - PLOT_CBD.py - plotting how cluster bond density from MD changes in time
 
 Any questions can be directed to - zac.goodwin@materials.ox.ac.uk
 
