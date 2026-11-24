@@ -8,20 +8,34 @@ Here is the workflow which allows the results [1] to be reproduced from the data
 2. pair_corr.py - computes pair correlation function between Li and O's in TFSI to determine suitable real-space cut-off for associations.
 
 3. probability*.py - computes coordination numbers and adjacency matrix from the MD trajector
+
 	3.1 - probability.py - computes the coordination numbers of TFSI O's around Na, and Na's around TFSI
+
 	3.2 - probability_adj.py - computes the adjacency matrix for the Na-O's associations
+
 	3.3 - probability_common.py - common functions used by 3.1 and 3.2
 
 4. GRAPHS.py - computes cluster distribution from the corresponding adjecency matrix
 
 5. PLOT_*.py - plotting functions 
-	5.1 -  
-	5.2 - 
-	5.3 - 
-	5.4 - 
+	
+	5.1.1 - PLOT_P - plots how the probabilities change as a function of time
+
+	5.1.2 - PLOT_P_Perc - plots how the product of the probabilities change as a function of time
+	
+	5.1.3 - plot_p_common - common plotting function for probabilities
+	
+	5.2.1 - PLOT_CLM - plotting how the cluster distributions change as a function of time
+
+	5.2.2 - PLOT_CLM_THRY - plotting how the cluster distribution changes as a funciton of time from the theory 
+
+	5.2.3 - PLOT_CBD - plotting how the cluster bond density changes as a function of time 
+
+	5.2.4 - plot_cluster_common - common plotting functions for the clusters
 
 Any questions can be directed to - zac.goodwin@materials.ox.ac.uk
 
 References:
 
 1. ZAH Goodwin Reversible Ionic Aggregetion Kinetics in Concentrated Electrolytes, Chemical Science, 17 (26), 13171-13185 (2026)
+2. https://doi.org/10.5281/zenodo.20207432
