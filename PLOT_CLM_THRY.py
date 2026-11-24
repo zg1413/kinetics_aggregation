@@ -10,13 +10,13 @@ from plot_cluster_common import get_system, setup_pgf
 
 setup_pgf(font_size=25, height_factor=1.0)
 
-TIMES = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150, 160]
-TIME_LABELS = [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]
-XI_P = 1
-XI_CP = 7
-XI_M = 7
-FP = 4
-FM = 3
+TIMES = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150, 160] #frame number
+TIME_LABELS = [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16] #time in ps
+XI_P = 1 #volume ratio of the Na cation
+XI_CP = 7 #volume ratio of the IL cation
+XI_M = 7 #volume ratio of the anion
+FP = 4 #functionality of the cation
+FM = 3 #functionality of the anion
 
 @dataclass(frozen=True)
 class TheoryCase:
@@ -65,15 +65,15 @@ def build_case(folder: str) -> TheoryCase:
     )
 
 def compute_clm(case: TheoryCase) -> np.ndarray:
-    clm = np.zeros((17, 17, len(TIME_LABELS)))
+    clm = np.zeros((17, 17, len(TIME_LABELS))) #creating arrat to populate - needs to be 1 larger than the number of ions looped over next 
     for i in range(16):
         for j in range(16):
             for q in range(len(TIME_LABELS)):
                 if i + j == 0:
                     continue
-                if FP * i - i - j + 1 < 0 or FM * j - i - j + 1 < 0:
+                if FP * i - i - j + 1 < 0 or FM * j - i - j + 1 < 0: 
                     continue
-                if i + j < 5:
+                if i + j < 5:#do it exactly for small systems
                     wlm = (
                         factorial(FP * i - i)
                         * factorial(FM * j - j)
@@ -84,7 +84,7 @@ def compute_clm(case: TheoryCase) -> np.ndarray:
                         * (1 - case.p_pm[q]) ** (FP * i)
                         * (1 - case.p_mp[q]) ** (FM * j)
                     )
-                else:
+                else:#stirling approximation for large clusters
                     log_wlm = (
                         lgamma(FP * i - i)
                         + lgamma(FM * j - j)
@@ -103,12 +103,9 @@ def compute_clm(case: TheoryCase) -> np.ndarray:
     return clm
 
 def main() -> None:
-    folder = Path("kinetics_rescal_05")
+    folder = Path("eigth_rescal")
     case = build_case(folder.name)
     clm = compute_clm(case)
-
-    om = case.N_Na * XI_P + case.N_EMIM * XI_CP + case.N_TFSI * XI_M
-    print((case.N_Na * XI_P + case.N_TFSI * XI_M) / om)
 
     for q in range(len(TIME_LABELS)):
         philm = np.zeros((17, 17))

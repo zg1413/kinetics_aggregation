@@ -17,27 +17,32 @@ FM = 3 #anion functionality
 P0_FIXED = 0.09 #initial probablility - has to be extracted from the MD simulations
 PI_FIXED = 0.87 #final probablility - has to be extracted from the MD simulations
 
-system = get_system(FOLDER)
+system = get_system(FOLDER) #getting information
 
-coord_na_tfsi = np.load(Path(FOLDER) / "coordination_NaO_33.npy")
-coord_na_tfsi_avg = coord_na_tfsi.sum(axis=0) / coord_na_tfsi.shape[0]
-p_pm = coord_na_tfsi_avg / FP
-print(p_pm[-1], p_pm[0])
+coord_na_tfsi = np.load(Path(FOLDER) / "coordination_NaO_33.npy") #importing data for comments 
+coord_na_tfsi_avg = coord_na_tfsi.sum(axis=0) / coord_na_tfsi.shape[0] #computing the average coordination 
+p_pm = coord_na_tfsi_avg / FP #converting to probability
 
-coord_tfsi_na = np.load(Path(FOLDER) / "coordination_ONa_33.npy")
-coord_tfsi_na_avg = coord_tfsi_na.sum(axis=0) / coord_tfsi_na.shape[0]
-p_mp = coord_tfsi_na_avg / FM
+coord_tfsi_na = np.load(Path(FOLDER) / "coordination_ONa_33.npy") #importing data for comments 
+coord_tfsi_na_avg = coord_tfsi_na.sum(axis=0) / coord_tfsi_na.shape[0] #computing the average coordination 
+p_mp = coord_tfsi_na_avg / FM #converting to probability
 
-t = np.linspace(0, int(700 * 100 / 1000), 700)
+t = np.linspace(0, int(700 * 100 / 1000), 700) #creating a list of times to evaluate the theory fit 
 
+############################
+#Fitting the theory equation
+############################
 param_mp, _ = curve_fit(
     lambda tt, G: time_dependence(tt, 0.0, 0.0, G, P0_FIXED, PI_FIXED),
     t[:T_MAX_STEPS],
     p_mp[:T_MAX_STEPS],
     p0=[1.0],
 )
+
+#printing fitted values, also the inital and dinal probabilities
 print(param_mp, coord_tfsi_na_avg[0] / FM, (coord_tfsi_na_avg[T_MAX_STEPS] / FM) )
 
+#evaluating the fitted theory at the times
 eq_tfsi = time_dependence(t, 0.0, 0.0, param_mp[0], P0_FIXED, PI_FIXED) * FM
 
 plt.figure()
