@@ -38,4 +38,4 @@ Any questions can be directed to - zac.goodwin@materials.ox.ac.uk
 References:
 
 1. ZAH Goodwin Reversible Ionic Aggregetion Kinetics in Concentrated Electrolytes, Chemical Science, 17 (26), 13171-13185 (2026)
-2. https://doi.org/10.5281/zenodo.20207432
+2. https://doi.org/10.5281/zenodo.20207432 - LAMMPS data for [1]
