@@ -8,13 +8,11 @@ from plot_cluster_common import get_system, setup_pgf
 setup_pgf(font_size=25, height_factor=1.0)
 
 FOLDER = Path("eight_rescal")
-TIMES = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150, 160]
-TIME_LABELS = [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]
+TIMES = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150, 160] #frame number 
+TIME_LABELS = [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16] #time in ps
 
 def main() -> None:
     params = get_system(str(FOLDER))
-    #_ = params["cell"]
-    #_ = params["N_Na"] + params["N_EMIM"] * params["n_emim"] + params["N_TFSI"] * params["n_tfsi"]
     om = params["N_Na"] * 1 + params["N_EMIM"] * 7 + params["N_TFSI"] * 7
 
     clm = np.load(FOLDER / "clm_33.npy")
@@ -24,7 +22,7 @@ def main() -> None:
         label = rf"MD, $x = 0.5$, $t =$ {TIME_LABELS[idx]} ps" if idx == 0 else rf"$t =$ {TIME_LABELS[idx]} ps"
         plt.text(0.5, 13, label, fontsize=20)
 
-        image = plt.imshow(clm[:16, :16, idx].T / om, cmap="Blues", interpolation="nearest", origin="lower", vmin=-9, vmax=-1)
+        image = plt.imshow(np.log(clm[:16, :16, idx].T / om), cmap="Blues", interpolation="nearest", origin="lower", vmin=-9, vmax=-1)
         cbar = plt.colorbar(image, fraction=0.045)
         cbar.ax.set_ylabel(r"$\ln(c_{lm})$", fontsize=25)
         plt.xlabel(r"$l$ Na$^+$ cations", fontsize=25)

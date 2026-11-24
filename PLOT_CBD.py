@@ -8,24 +8,25 @@ from plot_cluster_common import get_system, setup_pgf
 setup_pgf(font_size=25, height_factor=1.45)
 
 FOLDER = Path("eight_rescal")
-TIMES = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150, 160]
-TIME_LABELS = [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]
+TIMES = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150, 160] #in frame number
+TIME_LABELS = [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16] #in ps
 COLORS = ["purple", "grey", "blue", "black"]
 MARKERS = ["o", "s", "^", "v", "d"]
 
 def main() -> None:
     params = get_system(str(FOLDER))
     cell_lo, cell_hi = params["cell"]
-    #_ = params["N_Na"] + params["N_EMIM"] * params["n_emim"] + params["N_TFSI"] * params["n_tfsi"]
-    #_ = cell_hi - cell_lo
 
+    #########
+    #looping over all times, and collecting different cases, to then plot in one go
+    ########
     for idx, t_index in enumerate(TIMES):
-        bonds = np.load(FOLDER / f"bonds_clm_{t_index}_33.npy")
-        cbd = bonds[:, 0].astype(int)
-        lpm = (bonds[:, 1] + bonds[:, 2]).astype(int)
+        bonds = np.load(FOLDER / f"bonds_clm_{t_index}_33.npy") #importing computed bonds
+        cbd = bonds[:, 0].astype(int) # number of bonds
+        lpm = (bonds[:, 1] + bonds[:, 2]).astype(int) #number of ions
 
         #matrix for collating CBD data to allow for more efficient plotting
-        arr = np.zeros((1000, 1000), dtype=int)
+        arr = np.zeros((1000, 1000), dtype=int) #array to store the counts of each number of bonds and number of ions
         np.add.at(arr, (cbd, lpm), 1)
         rows, cols = np.where(arr != 0)
 
