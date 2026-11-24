@@ -18,19 +18,24 @@ Here is the workflow which allows the results [1] to be reproduced from the data
 4. GRAPHS.py - computes cluster distribution from the corresponding adjecency matrix
 
 5. PLOT_*.py - plotting functions 
+	
+	5.1.1 - PLOT_P - plots how the probabilities change as a function of time
 
-	5.1 - PLOT_P.py - plotting how the associaiton probabilities change in time from MD and theory
+	5.1.2 - PLOT_P_Perc - plots how the product of the probabilities change as a function of time
+	
+	5.1.3 - plot_p_common - common plotting function for probabilities
+	
+	5.2.1 - PLOT_CLM - plotting how the cluster distributions change as a function of time
 
-	5.2 - plot_p_common.py - functions used in PLOT_P.py, common to other plotting functions
+	5.2.2 - PLOT_CLM_THRY - plotting how the cluster distribution changes as a funciton of time from the theory 
 
-	5.3 - PLOT_CLM.py - plotting how cluster distribution from MD changes in time  
+	5.2.3 - PLOT_CBD - plotting how the cluster bond density changes as a function of time 
 
-	5.4 - PLOT_CLM_THRY.py - plotting how cluster distribution from theory changes in time
-
-	5.5 - PLOT_CBD.py - plotting how cluster bond density from MD changes in time
+	5.2.4 - plot_cluster_common - common plotting functions for the clusters
 
 Any questions can be directed to - zac.goodwin@materials.ox.ac.uk
 
 References:
 
 1. ZAH Goodwin Reversible Ionic Aggregetion Kinetics in Concentrated Electrolytes, Chemical Science, 17 (26), 13171-13185 (2026)
+2. https://doi.org/10.5281/zenodo.20207432 - LAMMPS data for [1]

@@ -36,7 +36,6 @@ PGF_WITH_LATEX = {
 mpl.rcParams.update(PGF_WITH_LATEX)
 
 FOLDER = Path("eigth_rescal")
-CUT_OFF = 3.0
 TIME_WINDOWS = [5, 50, 100, 200]
 TIME_LABELS_PS = [0.5, 5, 10, 20]
 N_FRAMES = 10

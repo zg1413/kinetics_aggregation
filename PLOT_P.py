@@ -10,15 +10,14 @@ configure_matplotlib(fontsize=20)
 
 T_STEPS = 700
 T_MAX_STEPS = 699
-FOLDER = "eigth_rescal/"
-FP = 4
-FM = 3
+FOLDER = "eightht_rescale/" 
+FP = 4 #cation functionality
+FM = 3 #anion functionality
 
-P0_FIXED = 0.09
-PI_FIXED = 0.87
+P0_FIXED = 0.09 #initial probablility - has to be extracted from the MD simulations
+PI_FIXED = 0.87 #final probablility - has to be extracted from the MD simulations
 
 system = get_system(FOLDER)
-_ = system
 
 coord_na_tfsi = np.load(Path(FOLDER) / "coordination_NaO_33.npy")
 coord_na_tfsi_avg = coord_na_tfsi.sum(axis=0) / coord_na_tfsi.shape[0]
